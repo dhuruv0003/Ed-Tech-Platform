@@ -1,0 +1,17 @@
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  .hero-image {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .auth-card {
+    transition: transform 0.3s ease;
+  }
+  
+  .auth-card:hover {
+    transform: translateY(-5px);
+  }

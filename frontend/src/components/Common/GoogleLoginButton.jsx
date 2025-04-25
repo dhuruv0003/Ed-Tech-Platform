@@ -1,7 +1,8 @@
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 
 const GoogleLoginButton = ({ onClick }) => (
-  <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+ 
+  <GoogleOAuthProvider  clientId={'474553548129-k0bioq7d0i0ljcjcoflrkr8edqgs2et7.apps.googleusercontent.com'}>
     <div className="w-full">
       <GoogleLogin
         onSuccess={credentialResponse => {

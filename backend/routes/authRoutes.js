@@ -4,6 +4,7 @@ const authController = require('../controllers/authController');
 const passport = require('passport');
 const { check } = require('express-validator');
 
+// 👤 Signup route with validation
 router.post('/signup', [
   check('email', 'Please include a valid email').isEmail(),
   check('password', 'Password must be at least 6 characters').isLength({ min: 6 }),
@@ -11,9 +12,27 @@ router.post('/signup', [
   check('lastName', 'Last name is required').not().isEmpty()
 ], authController.signup);
 
+// 🔐 Login
 router.post('/login', authController.login);
-router.get('/google', authController.googleAuth);
-router.get('/google/callback', authController.googleCallback);
-router.get('/me', passport.authenticate('jwt', { session: false }), authController.getMe);
+
+// 🌐 Google OAuth Entry Point
+router.get(
+  '/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+// ✅ Google OAuth Callback
+router.get(
+  '/google/callback',
+  passport.authenticate('google', { session: false, failureRedirect: '/login' }),
+  authController.googleCallback
+);
+
+// 🧑‍🎓 Get current user details using JWT
+router.get(
+  '/me',
+  passport.authenticate('jwt', { session: false }),
+  authController.getMe
+);
 
 module.exports = router;

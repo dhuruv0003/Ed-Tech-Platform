@@ -3,6 +3,7 @@ import { useAuth } from '../../context/AuthContext'
 import AuthHeader from './AuthHeader'
 import GoogleLoginButton from '../Common/GoogleLoginButton'
 import Loader from '../Common/Loader'
+import { useNavigate } from 'react-router-dom'
 
 const Signup = () => {
   const { signup, googleLogin } = useAuth()
@@ -15,12 +16,14 @@ const Signup = () => {
     university: '',
   })
   const [loading, setLoading] = useState(false)
-
+  const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     try {
       await signup(formData)
+      navigate('/dashboard')
+      
     } catch (err) {
       alert(err.response?.data?.error || 'Signup failed')
     }
@@ -55,9 +58,44 @@ const Signup = () => {
                 onChange={(e) => setFormData({...formData, lastName: e.target.value})}
               />
             </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <input
+                type="email"
+                required
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                onChange={(e) => setFormData({...formData, email: e.target.value})}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Password</label>
+              <input
+                type="password"
+                required
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                onChange={(e) => setFormData({...formData, password: e.target.value})}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">dob</label>
+              <input
+                type="date"
+                required
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                onChange={(e) => setFormData({...formData, dob: e.target.value})}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">University</label>
+              <input
+                type="text"
+                required
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                onChange={(e) => setFormData({...formData, university: e.target.value})}
+              />
+            </div>
           </div>
 
-          {/* Other form fields */}
 
           <button
             type="submit"

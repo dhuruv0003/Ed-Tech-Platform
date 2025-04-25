@@ -3,17 +3,19 @@ import { useAuth } from '../../context/AuthContext'
 import AuthHeader from './AuthHeader'
 import GoogleLoginButton from '../Common/GoogleLoginButton'
 import Loader from '../Common/Loader'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const { login, googleLogin } = useAuth()
   const [formData, setFormData] = useState({ email: '', password: '' })
   const [loading, setLoading] = useState(false)
-
+  const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     try {
       await login(formData.email, formData.password)
+      navigate('/dashboard')
     } catch (err) {
       alert(err.response?.data?.error || 'Login failed')
     }

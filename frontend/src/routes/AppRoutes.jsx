@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Login from '../components/Auth/Login';
+// import Signup from '../components/Auth/Signup'
 import Signup from '../components/Auth/Signup'
 import Dashboard from '../components/Dashboard/Dashboard'
 import Loader from '../components/Common/Loader'
